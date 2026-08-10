@@ -164,6 +164,122 @@ chmod +x setup_macos.sh INSTALL_AND_RUN.command
 
 No DMG installation is required for this version.
 
+## How to use GenAI MIDI Studio
+
+### 1. Open the application
+
+After completing the first installation, double-click
+`OPEN_GENAI_MIDI.app`. The service starts in the background and the GUI opens
+in the default browser.
+
+If the browser does not open, visit:
+
+```text
+http://localhost:8501
+```
+
+The project folder must remain in the same location used during installation.
+
+### 2. Check the system
+
+Use **Check system** in the sidebar before the first generation. The check
+confirms that FluidSynth, FFmpeg, Ollama, the selected local model, and the
+SoundFont are available.
+
+If the local Ollama service or Qwen model is missing, use **Start Ollama** and
+**Pull model** in the sidebar. The default local model is
+`qwen2.5:7b-instruct`.
+
+### 3. Select an AI provider and model
+
+Choose an AI provider in the sidebar:
+
+- **Ollama** runs locally and does not require an API key.
+- **OpenAI GPT**, **Gemini / Google AI Studio**, or **Claude** requires the
+  corresponding API key.
+- Select a listed model, or select **Custom model…** and enter its exact model
+  ID.
+
+Online API keys entered in the GUI are retained only for the current session
+and are not written to project files, generated music, prompts, or feedback
+data.
+
+### 4. Enter the music requirements
+
+1. Choose **AI automatic** or **Manual selection** for musical styles.
+2. In manual mode, select one to four different styles in priority order.
+   Unused `None` positions are ignored.
+3. Enable and complete at least one of **Lyrics**, **Scene**, or **Feeling**.
+4. Enter any optional additional requirements, such as duration, tempo,
+   structure, mood, or production details.
+5. Choose **AI automatic** or **Manual selection** for instruments.
+6. Configure presets, articulations, and audio effects if required.
+7. Optionally upload a reference MIDI, JSON, ABC, MusicXML, or audio file.
+8. Select the output folder or keep the default location.
+
+### 5. Generate the music
+
+Start generation from the GUI. The selected AI converts the requirements into
+validated composition JSON. The deterministic backend then creates the MIDI
+file and renders an MP3 using FluidSynth and FFmpeg.
+
+Enhanced mode analyses the initial composition and assigns a quality score. If
+the score is below 85/100, the application performs one automatic refinement
+and keeps the better result.
+
+### 6. Review and save the results
+
+Each run is stored in:
+
+```text
+outputs/<UTC-time>-<run-id>/
+```
+
+The run folder normally contains:
+
+- `composition.json` — structured composition data.
+- `composition.mid` — generated MIDI.
+- `composition.mp3` — rendered audio.
+
+Use the GUI's **Play**, **Pause**, and **Stop** buttons to control playback.
+Audio never starts automatically.
+
+### 7. Provide optional feedback
+
+After generation, select **Open feedback window**:
+
+- Select **No — do nothing** to close the window without saving feedback.
+- Select **Yes — save and learn** to save the ratings and comments and update
+  the active prompt profile.
+- Ratings default to 5/5 and can be changed before submission.
+
+Later generations retrieve relevant successful examples and failure lessons
+from the local knowledge files. Feedback updates runtime JSON data only; it
+cannot modify the program source code or dependencies.
+
+### 8. Use AI Training
+
+Select **AI Training** from the navigation bar:
+
+1. Choose **Simple** for short randomized requirements or **Professional** for a
+   detailed AI-produced music brief.
+2. Select the training provider and model.
+3. Choose the number of cases from 1 to 100.
+4. Review each generated result.
+5. Select **Satisfied**, submit a structured reflection, or cancel the session.
+
+Training progress and background prompt-profile updates are shown in the GUI.
+You can stop the training session at any time.
+
+### 9. Close or reopen the application
+
+- Closing the browser tab does not stop the background service.
+- Double-click `OPEN_GENAI_MIDI.app` to reopen the GUI.
+- Double-click `STOP_GENAI_MIDI.app` to stop the service completely.
+
+For command-line operation and troubleshooting, see
+[`COMMAND_TUTORIAL.md`](COMMAND_TUTORIAL.md).
+
 ## Architecture
 
 ```text
