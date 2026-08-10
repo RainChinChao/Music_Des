@@ -82,13 +82,87 @@ Review `LICENSE_NOTES.md` before commercial release.
 See `COMMAND_TUTORIAL.md` for every command and `JSON_RULES.md` for the data
 contract.
 
-## Double-click macOS installation and launch
+## Double-click installation on macOS
 
-Double-click `INSTALL_AND_RUN.command`. On first launch it runs the complete
-installation, creates initial learning files, configures the three-day Google
-Drive schedule, starts the web server in the background, and opens the GUI in a
-browser. It then creates `OPEN_GENAI_MIDI.app` and `STOP_GENAI_MIDI.app`.
-Subsequent opening/stopping is hidden and does not show Terminal. No DMG build is used.
+### First installation
+
+1. Download the project and extract the ZIP file. Do not run the installer from
+   inside the ZIP preview.
+2. Open the extracted project folder.
+3. Double-click `INSTALL_AND_RUN.command`.
+4. Allow the installation to finish. It installs the required applications and
+   Python environment, creates the initial learning files, configures the
+   optional three-day Google Drive schedule, starts the web server in the
+   background, and opens the GUI in the default browser.
+5. After installation, the project folder contains:
+   - `OPEN_GENAI_MIDI.app` — double-click to reopen the tool.
+   - `STOP_GENAI_MIDI.app` — double-click to stop the background server.
+
+Keep the extracted project folder in its original location after installation.
+Moving or renaming it may prevent the generated launcher applications from
+finding the installed files.
+
+### If macOS says Apple cannot verify the developer
+
+The application is not notarised with a paid Apple Developer certificate, so
+macOS Gatekeeper may block the first launch. This warning does not mean that the
+application failed to install.
+
+Use either of these macOS methods:
+
+**Method 1 — Control-click Open**
+
+1. In Finder, hold **Control** and click `INSTALL_AND_RUN.command`.
+2. Select **Open**.
+3. Select **Open** again in the security dialog.
+
+**Method 2 — Privacy & Security**
+
+1. Try to open `INSTALL_AND_RUN.command` once and close the warning.
+2. Open **System Settings → Privacy & Security**.
+3. Scroll to **Security** and find the message that
+   `INSTALL_AND_RUN.command` was blocked.
+4. Click **Open Anyway**, authenticate with Touch ID or the Mac password, and
+   confirm **Open**.
+
+The same one-time approval may be required for `OPEN_GENAI_MIDI.app` and
+`STOP_GENAI_MIDI.app`.
+
+If macOS still blocks files downloaded from GitHub, open Terminal, change to the
+extracted project directory, and run:
+
+```bash
+chmod +x INSTALL_AND_RUN.command
+xattr -dr com.apple.quarantine INSTALL_AND_RUN.command OPEN_GENAI_MIDI.app STOP_GENAI_MIDI.app
+./INSTALL_AND_RUN.command
+```
+
+Only remove the quarantine attribute after confirming that the files came from
+this official repository.
+
+### Reopening and closing the tool
+
+After the first installation:
+
+- To open it again, double-click `OPEN_GENAI_MIDI.app`. The server runs in the
+  background without leaving a Terminal window open, and the GUI opens in the
+  browser.
+- Closing the browser tab does not stop the tool.
+- To stop it completely, double-click `STOP_GENAI_MIDI.app`.
+- If the browser was closed while the server is still running, double-click
+  `OPEN_GENAI_MIDI.app` again.
+
+### Terminal fallback
+
+If double-click installation does not work, open Terminal in the extracted
+project folder and run:
+
+```bash
+chmod +x setup_macos.sh INSTALL_AND_RUN.command
+./INSTALL_AND_RUN.command
+```
+
+No DMG installation is required for this version.
 
 ## Architecture
 
