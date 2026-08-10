@@ -1,0 +1,54 @@
+{
+  "title": "Deterministic Demo",
+  "tempo_bpm": 110,
+  "time_signature": [4, 4],
+  "ticks_per_beat": 480,
+  "tracks": [
+    {
+      "name": "Main Piano",
+      "instrument": "Piano",
+      "preset": "Default",
+      "articulation": "Legato",
+      "audio_fx": [
+        {"type": "Channel EQ", "enabled": true, "amount": 72},
+        {"type": "Space Designer", "enabled": true, "amount": 35}
+      ],
+      "settings": {
+        "volume": 105,
+        "velocity": 88,
+        "sustain": true,
+        "mute": false,
+        "pan": 54,
+        "eq": {"brightness": 72, "resonance": 48, "low": 64, "mid": 64, "high": 70}
+      },
+      "notes": [
+        {"pitch": "C4", "start": 0, "duration": 1, "velocity": 88},
+        {"pitch": "E4", "start": 0, "duration": 1, "velocity": 88},
+        {"pitch": "G4", "start": 0, "duration": 1, "velocity": 88},
+        {"pitch": "F4", "start": 1, "duration": 1, "velocity": 96}
+      ],
+      "automation": [
+        {"type": "sustain", "beat": 2, "value": false},
+        {"type": "pan", "beat": 2, "value": 74},
+        {"type": "mute", "beat": 3, "value": true},
+        {"type": "mute", "beat": 4, "value": false}
+      ]
+    },
+    {
+      "name": "Drum Kit",
+      "instrument": "Drums",
+      "preset": "Default",
+      "articulation": "Staccato",
+      "audio_fx": [],
+      "settings": {"volume": 100, "velocity": 90, "sustain": false,
+                   "mute": false, "pan": 64,
+                   "eq": {"brightness": 64, "resonance": 64, "low": 64,
+                          "mid": 64, "high": 64}},
+      "notes": [
+        {"pitch": 36, "start": 0, "duration": 0.25, "velocity": 90},
+        {"pitch": 38, "start": 1, "duration": 0.25, "velocity": 90}
+      ],
+      "automation": []
+    }
+  ]
+}

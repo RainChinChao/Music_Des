@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deterministic-midi-generator"
+version = "8.2.0"
+description = "Deterministic JSON-to-MIDI, MIDI-to-MP3 and optional GenAI music workflow"
+requires-python = ">=3.10"
+dependencies = ["mido>=1.3,<2"]
+
+[project.optional-dependencies]
+ai = [
+  "anthropic>=0.49,<1",
+  "google-genai>=2,<3",
+  "jsonschema>=4.23,<5",
+  "openai>=1.68,<3",
+  "python-dotenv>=1.0,<2",
+  "requests>=2.32,<3"
+]
+gui = ["streamlit>=1.42,<2"]
+all = [
+  "anthropic>=0.49,<1",
+  "google-genai>=2,<3",
+  "jsonschema>=4.23,<5",
+  "openai>=1.68,<3",
+  "python-dotenv>=1.0,<2",
+  "requests>=2.32,<3",
+  "streamlit>=1.42,<2"
+]
+
+[project.scripts]
+json-to-midi = "deterministic_midi.cli:main"
+midi-to-mp3 = "deterministic_midi.audio_cli:main"
+requirements-to-json = "deterministic_midi.ai_cli:main"
+music-workflow = "deterministic_midi.workflow_cli:main"
+music-gui = "deterministic_midi.gui_launcher:main"
+music-doctor = "deterministic_midi.doctor_cli:main"
+music-cloud-sync = "deterministic_midi.cloud_sync_cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
